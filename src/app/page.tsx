@@ -1,6 +1,6 @@
 'use client'
 import { useForm, SubmitHandler } from "react-hook-form"
-import { Box, Button, flexbox, FormControl, FormLabel, Input, Radio, RadioGroup, Stack, Text, Textarea } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, Input, Radio, RadioGroup, Stack, Textarea } from '@chakra-ui/react'
 import { useState } from 'react'
 import axios from "axios"
 import Image from "next/image"
@@ -19,7 +19,6 @@ export default function Page() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm<Inputs>({
     defaultValues: {
       text7: "ー・－・－・－・－・－・－・－・－・－・－・－・－・－・－・－・－\n" +
