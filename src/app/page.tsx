@@ -78,7 +78,7 @@ export default function Page() {
             bg={"white"}
             boxShadow="md"
             my={3}
-            mx={{ base: "auto", md: "0" }}  // baseとsmで中央揃え、md以上で左揃え
+            mx={{ base: "auto", sm: "0" }}  // baseとsmで中央揃え、md以上で左揃え
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -166,11 +166,15 @@ export default function Page() {
               <FormControl mb={3}>
                 <FormLabel>トーン</FormLabel>
                 <RadioGroup onChange={setTone} value={tone}>
-                  <Stack direction='row'>
-                    <Radio value='デフォルト'>デフォルト</Radio>
-                    <Radio value='ビジネス'>ビジネス</Radio>
-                    <Radio value='フォーマル'>フォーマル</Radio>
-                    <Radio value='カジュアル'>カジュアル</Radio>
+                  <Stack direction={{ base: 'column', sm: 'row' }}>
+                    <Stack direction='row'>
+                      <Radio value='デフォルト'>デフォルト</Radio>
+                      <Radio value='ビジネス'>ビジネス</Radio>
+                    </Stack>
+                    <Stack direction='row'>
+                      <Radio value='フォーマル'>フォーマル</Radio>
+                      <Radio value='カジュアル'>カジュアル</Radio>
+                    </Stack>
                   </Stack>
                 </RadioGroup>
               </FormControl>
