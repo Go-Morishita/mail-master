@@ -1,6 +1,6 @@
 'use client'
 import { useForm, SubmitHandler } from "react-hook-form"
-import { Box, Button, FormControl, FormLabel, Input, Radio, RadioGroup, Stack, Textarea } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, Input, Radio, RadioGroup, Stack, Textarea, useBreakpoint, useBreakpointValue } from '@chakra-ui/react'
 import { useState } from 'react'
 import axios from "axios"
 import Image from "next/image"
@@ -64,6 +64,7 @@ export default function Page() {
     }
   }
 
+  const placeholder = useBreakpointValue({base: "例：web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。", md:"例：内定を承諾する旨を伝えたい。\n　　web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。\n　　体調不良で今日の〇〇時から〇〇時のシフトに出ることができないことを伝えたい。"})
 
   return (
     <>
@@ -131,7 +132,7 @@ export default function Page() {
               <FormControl isRequired mb={3}>
                 <FormLabel>宛先（属性）</FormLabel>
                 <Input
-                  placeholder='例：企業、インターン先、大学の先生、バイト先、友達'
+                  placeholder='例：企業、インターン先、教授、バイト先、友達'
                   {...register('text1', { required: true })}
                 />
               </FormControl>
@@ -139,8 +140,8 @@ export default function Page() {
               <FormControl isRequired mb={3}>
                 <FormLabel>内容</FormLabel>
                 <Textarea
-                  placeholder={"例：内定を承諾する旨を伝えたい。\n　　web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。\n　　現在担当しているプロジェクトの進捗状況についての報告。現在〇〇のフェーズで今後の予定としては〇〇を行う予定であることを伝えたい。\n　　体調不良で今日の〇〇時から〇〇時のシフトに出ることができないことを伝えたい。"}
-                  h={110}
+                  placeholder={placeholder}
+                  h={{ base: 100, md: 85 }}
                   {...register('text2', { required: true })}
                 />
               </FormControl>
@@ -148,7 +149,7 @@ export default function Page() {
               <FormControl mb={3}>
                 <FormLabel>構造</FormLabel>
                 <Textarea
-                  placeholder={"例：シンプルに短くまとめる、改行を多めに\n過去に送信したメールと同じ構造にしたい場合は、ここに過去のメールを貼り付ける"}
+                  placeholder={"例：シンプルに短くまとめる、改行を多めに\n（過去に送信したメールと同じ構造にしたい場合は、ここに過去のメールを貼り付ける）"}
                   {...register('text4')}
                 />
               </FormControl>
