@@ -23,7 +23,7 @@ export default function Page() {
     defaultValues: {
       text7: "ー・－・－・－・－・－・－・－・－・－・－・－・－・－・－・－・－\n" +
         "〇〇大学 〇〇学部 〇〇学科\n" +
-        "メール 太郎\n" +
+        "苗字 名前\n" +
         "E-MAIL：\n" +
         "TEL：\n" +
         "ー・－・－・－・－・－・－・－・－・－・－・－・－・－・－・－・－",
@@ -44,7 +44,6 @@ export default function Page() {
           - 送信者の名前: ${data.text5}
           - 送信先の名前: ${data.text6}
           - 送信先の詳細: ${data.text1}
-         
           - 内容: ${data.text2}
           - 受信したメール: ${data.text3}
           - 参考にしてほしいメールの構造: ${data.text4}
