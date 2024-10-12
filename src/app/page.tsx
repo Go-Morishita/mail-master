@@ -217,9 +217,9 @@ export default function Page() {
               </FormControl>
 
               {isLoading ? (
-                <Button isLoading size="md" colorScheme='blue' type="submit">生成</Button>
+                <Button isLoading size="md" colorScheme='blue' type="submit">メールを生成</Button>
               ) : (
-                <Button size="md" colorScheme='blue' type="submit" mb={1}>生成</Button>
+                <Button size="md" colorScheme='blue' type="submit" mb={1}>メールを生成</Button>
               )}
             </form>
           </Box>
@@ -241,7 +241,7 @@ export default function Page() {
               生成されたメール
             </Heading>
 
-            <FormControl mb={3}>
+            <FormControl mb={1}>
               <FormLabel>件名</FormLabel>
               <Input
                 value={responseSub}
@@ -251,7 +251,7 @@ export default function Page() {
 
             <Button colorScheme='blue' onClick={() => handleCopyToClipboard(responseSub)} mb={3}>コピー</Button>
 
-            <FormControl mb={3}>
+            <FormControl mb={1}>
               <FormLabel>本文</FormLabel>
               <Textarea
                 value={responseBody}
@@ -265,7 +265,7 @@ export default function Page() {
 
         </Box>
       </Box>
-      <Box bg="gray.400" color="white" pb={4} pt={2} textAlign="center">
+      <Box bg="gray.400" color="white" pb={6} pt={3} textAlign="center">
 
         <Box display="flex" justifyContent="center" alignItems="center" mb={1}>
           <div style={{ maxWidth: '200px' }}>
