@@ -50,6 +50,7 @@ export default function Page() {
           - メールの内容: ${data.text2}
           - 参考にしてほしいメールの構造: ${data.text4}
           - 最後に付けてほしい帯: ${data.text7}
+          - メールのトーン: ${tone}
           # 補足条件
           - 返答はメールの本文のみを含めて、それ以外の文字は入れないでください。
         `
