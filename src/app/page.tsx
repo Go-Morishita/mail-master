@@ -30,7 +30,8 @@ export default function Page() {
     }
   });
 
-  const [type, setType] = useState("1");
+  const [type, setType] = useState("新規");
+  const [tone, setTone] = useState("デフォルト");
   const [responseText, setResponseText] = useState("");
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
@@ -41,11 +42,12 @@ export default function Page() {
           # 命令
           あなたはメールの内容を以下の情報をもとに生成するAIボットです。要件にあった返信を生成してください。
           # 要件
+          - メールタイプ: ${type}
+          - 受信メール: ${data.text3}
           - 送信者の名前: ${data.text5}
-          - 送信先の名前: ${data.text6}
-          - 送信先の詳細: ${data.text1}
-          - 内容: ${data.text2}
-          - 受信したメール: ${data.text3}
+          - 宛先の名前: ${data.text6}
+          - 宛先の属性: ${data.text1}
+          - メールの内容: ${data.text2}
           - 参考にしてほしいメールの構造: ${data.text4}
           - 最後に付けてほしい帯: ${data.text7}
           # 補足条件
@@ -63,7 +65,7 @@ export default function Page() {
     }
   }
 
-  const placeholder = useBreakpointValue({base: "例：web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。", md:"例：内定を承諾する旨を伝えたい。\n　　web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。\n　　体調不良で今日の〇〇時から〇〇時のシフトに出ることができないことを伝えたい。"})
+  const placeholder = useBreakpointValue({ base: "例：web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。", md: "例：内定を承諾する旨を伝えたい。\n　　web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。\n　　体調不良で今日の〇〇時から〇〇時のシフトに出ることができないことを伝えたい。" })
 
   return (
     <>
@@ -96,13 +98,13 @@ export default function Page() {
                 <FormLabel>メールタイプ</FormLabel>
                 <RadioGroup onChange={setType} value={type}>
                   <Stack direction='row'>
-                    <Radio value='1'>新規</Radio>
-                    <Radio value='2'>返信</Radio>
+                    <Radio value='新規'>新規</Radio>
+                    <Radio value='返信'>返信</Radio>
                   </Stack>
                 </RadioGroup>
               </FormControl>
 
-              {type === "2" && (
+              {type === "返信" && (
                 <FormControl isRequired mb={3}>
                   <FormLabel>受信メール</FormLabel>
                   <Textarea
@@ -158,6 +160,18 @@ export default function Page() {
                   h={150}
                   {...register('text7')}
                 />
+              </FormControl>
+
+              <FormControl mb={3}>
+                <FormLabel>トーン</FormLabel>
+                <RadioGroup onChange={setTone} value={tone}>
+                  <Stack direction='row'>
+                    <Radio value='デフォルト'>デフォルト</Radio>
+                    <Radio value='ビジネス'>ビジネス</Radio>
+                    <Radio value='フォーマル'>フォーマル</Radio>
+                    <Radio value='カジュアル'>カジュアル</Radio>
+                  </Stack>
+                </RadioGroup>
               </FormControl>
 
               <Button colorScheme='blue' type="submit">生成</Button>
