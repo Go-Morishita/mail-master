@@ -1,6 +1,6 @@
 'use client'
 import { useForm, SubmitHandler } from "react-hook-form"
-import { Box, Button, FormControl, FormLabel, Heading, Input, Radio, RadioGroup, Stack, Text, Textarea, useBreakpointValue, useToast } from '@chakra-ui/react'
+import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, Radio, RadioGroup, Stack, Text, Textarea, useBreakpointValue, useToast } from '@chakra-ui/react'
 import TextareaAutosize from 'react-textarea-autosize';
 import { useState } from 'react'
 import axios from "axios"
@@ -217,9 +217,15 @@ export default function Page() {
               </FormControl>
 
               {isLoading ? (
-                <Button isLoading size="md" colorScheme='blue' type="submit">メールを生成</Button>
+                <Flex justifyContent={{ base: "flex-end", md: "flex-start" }}>
+                  <Button isLoading size="md" colorScheme="blue" type="submit">
+                    メールを生成
+                  </Button>
+                </Flex>
               ) : (
-                <Button size="md" colorScheme='blue' type="submit" mb={1}>メールを生成</Button>
+                <Flex justifyContent={{ base: "flex-end", md: "flex-start" }}>
+                  <Button size="md" colorScheme='blue' type="submit" mb={1}>メールを生成</Button>
+                </Flex>
               )}
             </form>
           </Box>
@@ -249,7 +255,9 @@ export default function Page() {
               />
             </FormControl>
 
-            <Button colorScheme='blue' onClick={() => handleCopyToClipboard(responseSub)} mb={3}>コピー</Button>
+            <Flex justifyContent={{ base: "flex-end", md: "flex-start" }}>
+              <Button colorScheme='blue' onClick={() => handleCopyToClipboard(responseSub)} mb={3}>コピー</Button>
+            </Flex>
 
             <FormControl mb={1}>
               <FormLabel>本文</FormLabel>
@@ -259,8 +267,9 @@ export default function Page() {
                 onChange={(e) => setResponseBody(e.target.value)}
               />
             </FormControl>
-
-            <Button colorScheme='blue' onClick={() => handleCopyToClipboard(responseBody)} mb={3}>コピー</Button>
+            <Flex justifyContent={{ base: "flex-end", md: "flex-start" }}>
+              <Button colorScheme='blue' onClick={() => handleCopyToClipboard(responseBody)} mb={3}>コピー</Button>
+            </Flex>
           </Box>
 
         </Box>
