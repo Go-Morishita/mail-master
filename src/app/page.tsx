@@ -131,7 +131,7 @@ export default function Page() {
               <FormControl isRequired mb={3}>
                 <FormLabel>宛先（属性）</FormLabel>
                 <Input
-                  placeholder='例：企業、内定先、インターン先、大学の先生、バイト先、友達'
+                  placeholder='例：企業、インターン先、大学の先生、バイト先、友達'
                   {...register('text1', { required: true })}
                 />
               </FormControl>
