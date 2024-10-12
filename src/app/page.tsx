@@ -1,9 +1,11 @@
 'use client'
 import { useForm, SubmitHandler } from "react-hook-form"
-import { Box, Button, FormControl, FormLabel, Input, Radio, RadioGroup, Stack, Textarea, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Button, FormControl, FormLabel, Heading, Input, Radio, RadioGroup, Stack, Text, Textarea, useBreakpointValue, useToast } from '@chakra-ui/react'
+import TextareaAutosize from 'react-textarea-autosize';
 import { useState } from 'react'
 import axios from "axios"
 import Image from "next/image"
+import Link from "next/link";
 
 type Inputs = {
   text1: string
@@ -32,9 +34,28 @@ export default function Page() {
 
   const [type, setType] = useState("新規");
   const [tone, setTone] = useState("デフォルト");
-  const [responseText, setResponseText] = useState("");
+
+  const [responseSub, setResponseSub] = useState("");
+  const [responseBody, setResponseBody] = useState("");
+
+  const toast = useToast();
+
+  const handleCopyToClipboard = async (text: string) => {
+    await navigator.clipboard.writeText(text);
+    toast({
+      title: 'コピーしました！',
+      status: 'success',
+      duration: 2000,
+      isClosable: true,
+
+    });
+  }
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setIsLoading(true);
+
     const conversation = [
       {
         role: "user", content:
@@ -59,11 +80,14 @@ export default function Page() {
 
     try {
       const res = await axios.post('/api/gpt', { conversation });
-      setResponseText(res.data.answer.toString());
+      setResponseSub(res.data.answer.subject.toString());
+      setResponseBody(res.data.answer.body.toString());
     } catch (error) {
       console.error('GPTとの通信に失敗:', error);
-      setResponseText('エラーが発生しました。もう一度お試しください。');
+      setResponseSub('エラーが発生しました。もう一度お試しください。');
+      setResponseBody('エラーが発生しました。もう一度お試しください。');
     }
+    setIsLoading(false);
   }
 
   const placeholder = useBreakpointValue({ base: "例：web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。", md: "例：内定を承諾する旨を伝えたい。\n　　web面接の日程を〇〇日から〇〇日に変更できないか聞きたい。\n　　体調不良で今日の〇〇時から〇〇時のシフトに出ることができないことを伝えたい。" })
@@ -71,7 +95,7 @@ export default function Page() {
   return (
     <>
       <Box bg={"#f1f1f1"} display={"flex"} justifyContent={"center"}>
-        <Box w={"90%"}>
+        <Box w={{ base: "92%", md: "70%" }}>
           <Box
             w={300}
             h={76.4}
@@ -92,10 +116,23 @@ export default function Page() {
           </Box>
 
 
-          <Box bg={"white"} boxShadow="md" mb={3} p={2}>
+          <Box bg={"white"} boxShadow="md" mb={3} px={2} py={4}>
+            <Heading
+              as="h1"
+              size="md"
+              mb={3}
+              sx={{
+                padding: '0.25em 0.5em',
+                color: '#494949',
+                backgroundColor: 'transparent',
+                borderLeft: 'solid 5px #7db4e6',
+              }}
+            >
+              生成したいメール情報を入力
+            </Heading>
             <form onSubmit={handleSubmit(onSubmit)}>
 
-              <FormControl isRequired mb={3}>
+              <FormControl mb={3}>
                 <FormLabel>メールタイプ</FormLabel>
                 <RadioGroup onChange={setType} value={type}>
                   <Stack direction='row'>
@@ -179,17 +216,74 @@ export default function Page() {
                 </RadioGroup>
               </FormControl>
 
-              <Button colorScheme='blue' type="submit">生成</Button>
+              {isLoading ? (
+                <Button isLoading size="md" colorScheme='blue' type="submit" mb={10}>生成</Button>
+              ) : (
+                <Button size="md" colorScheme='blue' type="submit" mb={10}>生成</Button>
+              )}
             </form>
 
-            {responseText && (
-              <div
-                style={{ marginTop: '16px', padding: '16px', backgroundColor: '#f7f7f7' }}
-                dangerouslySetInnerHTML={{ __html: responseText }}
+            <Heading
+              as="h1"
+              size="md"
+              mb={3}
+              sx={{
+                padding: '0.25em 0.5em',
+                color: '#494949',
+                backgroundColor: 'transparent',
+                borderLeft: 'solid 5px #FFC107',
+              }}
+            >
+              生成されたメール
+            </Heading>
+
+            <FormControl mb={3}>
+              <FormLabel>件名</FormLabel>
+              <Input
+                value={responseSub}
+                onChange={(e) => setResponseSub(e.target.value)}
               />
-            )}
+            </FormControl>
+
+            <Button colorScheme='blue' onClick={() => handleCopyToClipboard(responseSub)} mb={3}>コピー</Button>
+
+            <FormControl mb={3}>
+              <FormLabel>本文</FormLabel>
+              <Textarea
+                value={responseBody}
+                as={TextareaAutosize}
+                onChange={(e) => setResponseBody(e.target.value)}
+              />
+            </FormControl>
+
+            <Button colorScheme='blue' onClick={() => handleCopyToClipboard(responseBody)} mb={3}>コピー</Button>
+
           </Box>
         </Box>
+      </Box>
+      <Box bg="gray.400" color="white" pb={4} textAlign="center">
+
+        <Box display="flex" justifyContent="center" alignItems="center">
+          <Image
+            src="/images/gpt (6).png"
+            alt="gpt logo"
+            width={250}
+            height={50}  // 高さを適切に設定
+          />
+        </Box>
+
+
+        <Text fontSize="sm">
+          Powered by ChatGPT-4o
+        </Text>
+        <Text fontSize="sm">
+          © 2024{" "}
+          <Link href="https://go-morishita.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <Text as="span" color="blue.500" textDecoration="underline">
+              Go Morishita
+            </Text>
+          </Link>. All Rights Reserved.
+        </Text>
       </Box>
     </>
   )
