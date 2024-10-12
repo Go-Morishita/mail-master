@@ -296,7 +296,7 @@ export default function Page() {
         </Text>
         <Text fontSize="sm">
           © 2024{" "}
-          <Link href="https://go-morishita.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <Link href="https://go.logicode.tech" target="_blank" rel="noopener noreferrer">
             <Text as="span" color="blue.500" textDecoration="underline">
               Go Morishita
             </Text>
