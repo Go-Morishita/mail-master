@@ -250,6 +250,7 @@ export default function Page() {
             <FormControl mb={1}>
               <FormLabel>件名</FormLabel>
               <Input
+                placeholder={"メールは何回でも生成できます"}
                 value={responseSub}
                 onChange={(e) => setResponseSub(e.target.value)}
               />
@@ -262,6 +263,7 @@ export default function Page() {
             <FormControl mb={1}>
               <FormLabel>本文</FormLabel>
               <Textarea
+                placeholder={"メールは何回でも生成できます"}
                 value={responseBody}
                 as={TextareaAutosize}
                 onChange={(e) => setResponseBody(e.target.value)}
@@ -279,11 +281,11 @@ export default function Page() {
         <Box display="flex" justifyContent="center" alignItems="center" mb={1}>
           <div style={{ maxWidth: '200px' }}>
             <Image
-              src="/images/gpt.png" // 画像のパス
+              src="/images/gpt.png"
               alt="Description of the image"
-              width={200} // 最大幅
-              height={1} // 必要に応じて高さを調整
-              layout="responsive" // レイアウトをレスポンシブに設定
+              width={200}
+              height={1}
+              layout="responsive"
             />
           </div>
         </Box>
