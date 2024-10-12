@@ -200,7 +200,7 @@ export default function Page() {
                 />
               </FormControl>
 
-              <FormControl mb={3}>
+              <FormControl mb={4}>
                 <FormLabel>トーン</FormLabel>
                 <RadioGroup onChange={setTone} value={tone}>
                   <Stack direction={{ base: 'column', sm: 'row' }}>
@@ -217,11 +217,15 @@ export default function Page() {
               </FormControl>
 
               {isLoading ? (
-                <Button isLoading size="md" colorScheme='blue' type="submit" mb={10}>生成</Button>
+                <Button isLoading size="md" colorScheme='blue' type="submit">生成</Button>
               ) : (
-                <Button size="md" colorScheme='blue' type="submit" mb={10}>生成</Button>
+                <Button size="md" colorScheme='blue' type="submit" mb={1}>生成</Button>
               )}
             </form>
+          </Box>
+
+
+          <Box bg={"white"} boxShadow="md" mb={3} px={2} py={4}>
 
             <Heading
               as="h1"
@@ -257,24 +261,27 @@ export default function Page() {
             </FormControl>
 
             <Button colorScheme='blue' onClick={() => handleCopyToClipboard(responseBody)} mb={3}>コピー</Button>
-
           </Box>
+
         </Box>
       </Box>
-      <Box bg="gray.400" color="white" pb={4} textAlign="center">
+      <Box bg="gray.400" color="white" pb={4} pt={2} textAlign="center">
 
-        <Box display="flex" justifyContent="center" alignItems="center">
-          <Image
-            src="/images/gpt (6).png"
-            alt="gpt logo"
-            width={250}
-            height={50}  // 高さを適切に設定
-          />
+        <Box display="flex" justifyContent="center" alignItems="center" mb={1}>
+          <div style={{ maxWidth: '200px' }}>
+            <Image
+              src="/images/gpt.png" // 画像のパス
+              alt="Description of the image"
+              width={200} // 最大幅
+              height={1} // 必要に応じて高さを調整
+              layout="responsive" // レイアウトをレスポンシブに設定
+            />
+          </div>
         </Box>
 
 
         <Text fontSize="sm">
-          Powered by ChatGPT-4o
+          Powered by ChatGPT-4o.
         </Text>
         <Text fontSize="sm">
           © 2024{" "}
