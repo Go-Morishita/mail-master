@@ -1,9 +1,9 @@
 import { Providers } from './providers'
 
-// export const metadata = {
-//   title: "mail-generator",
-//   description: "面倒なメールの作成はこのAIアプリケーションにお任せください。",
-// }
+export const metadata = {
+  title: "mail-generator",
+  description: "面倒なメールの作成はこのAIアプリケーションにお任せください。",
+}
 
 export default function RootLayout({
   children,
