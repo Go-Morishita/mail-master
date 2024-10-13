@@ -1,12 +1,12 @@
 {
-    "name": "Next.js App",
-    "short_name": "Next.js App",
-    "description": "Next.js App",
+    "name": "mail-generator",
+    "short_name": "mail-generator",
+    "description": "面倒なメールの作成はこのAIアプリケーションにお任せください。",
     "start_url": "/",
     "display": "standalone",
     "background_color": "#fff",
     "theme_color": "#fff",
     "icons": [
-      { "src": "/favicon.svg", "type": "image/svg", "sizes": "60x60" }
+      { "src": "/favicon.ico", "type": "image/ico", "sizes": "60x60" }
     ]
   }
