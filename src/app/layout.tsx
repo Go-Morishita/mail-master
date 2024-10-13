@@ -1,7 +1,7 @@
 import { Providers } from './providers'
 
 export const metadata = {
-  title: "mail generator",
+  title: "mail-generator",
   description: "面倒なメールの作成はこのAIアプリケーションにお任せください。",
 }
 
